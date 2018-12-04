@@ -1,4 +1,4 @@
-package com.menglei.account;
+package com.menglei.account.baseapi;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
