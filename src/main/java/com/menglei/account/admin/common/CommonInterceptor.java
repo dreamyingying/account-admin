@@ -33,6 +33,7 @@ public class CommonInterceptor implements HandlerInterceptor {
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
 
         //Controller处理完后，调用此方法
+        request.setAttribute("ml!",request.getContextPath());
     }
 
     @Override
