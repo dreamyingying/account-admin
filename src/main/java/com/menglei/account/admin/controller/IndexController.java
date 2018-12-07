@@ -24,6 +24,12 @@ public class IndexController {
     @RequestMapping(value = "/")
     public String index(){
         log.info("进入首页！");
-        return "index";
+        return "/account/index";
+    }
+
+    @RequestMapping(value = "/welcome")
+    public String welcome(){
+        log.info("进入welcome！");
+        return "/account/welcome";
     }
 }
