@@ -1,5 +1,6 @@
 package com.menglei.account.admin.common;
 
+import com.menglei.account.entity.User;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
@@ -19,13 +20,15 @@ public class CommonInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+        String uri = request.getRequestURI();
+
         //拦截用户是否登陆
-       /* User user = (User)request.getSession().getAttribute("user");
+        User user = (User)request.getSession().getAttribute("user");
         if (null == user){
             //如果没有登陆
-            response.sendRedirect("/login");
+            response.sendRedirect(request.getContextPath()+"/login");
             return false;
-        }*/
+        }
         return true;
     }
 

@@ -7,16 +7,30 @@
  */
 package com.menglei.account.admin.config;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.serializer.SerializerFeature;
+import com.alibaba.fastjson.support.config.FastJsonConfig;
+import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
+import com.alibaba.fastjson.support.springfox.SwaggerJsonSerializer;
+import com.menglei.account.entity.User;
 import feign.Feign;
+import feign.codec.Encoder;
 import feign.hystrix.HystrixFeign;
+import org.springframework.beans.factory.ObjectFactory;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
+import org.springframework.boot.autoconfigure.http.HttpMessageConverters;
 import org.springframework.boot.autoconfigure.web.servlet.WebMvcRegistrations;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.cloud.openfeign.support.SpringEncoder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
 import org.springframework.core.annotation.AnnotatedElementUtils;
+import org.springframework.http.MediaType;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author York Liu (york.liu@cmgplex.com)
@@ -51,4 +65,5 @@ public class FeignConfig {
                     !AnnotatedElementUtils.hasAnnotation(beanType, FeignClient.class);
         }
     }
+
 }

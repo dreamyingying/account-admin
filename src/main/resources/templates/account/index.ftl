@@ -66,7 +66,7 @@
                     </a>
                     <ul class="nav nav-second-level" style="font-size: 16px;">
                             <li>
-                                <a class="J_menuItem" href="${ctx!}/admin/user/index">用户管理</a>
+                                <a class="J_menuItem" href="${ml!}/admin/user/index">用户管理</a>
                             </li>
                             <li>
                                 <a class="J_menuItem" href="${ctx!}/admin/role/index">角色管理</a>

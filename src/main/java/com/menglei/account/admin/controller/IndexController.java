@@ -18,8 +18,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class IndexController {
     private Logger log = LoggerFactory.getLogger(IndexController.class);
 
-    @Autowired
-    private IUserService userService;
 
     /**
       * Description 首页
@@ -27,8 +25,12 @@ public class IndexController {
       * @date 16:07 2018/12/4
       **/
     @RequestMapping(value = "/")
+    public String defaultPage(){
+        return "redirect:/login";
+    }
+
+    @RequestMapping(value = "/admin/index")
     public String index(){
-        log.info("进入首页！");
         return "/account/index";
     }
 

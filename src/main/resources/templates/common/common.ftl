@@ -21,11 +21,11 @@ qq：199808090
 <script src="${ml!}/madmin/js/plugins/iCheck/icheck.min.js"></script>
 <!-- layer -->
 <script src="${ml!}/madmin/js/plugins/layer/layer.min.js"></script>
+<script src="${ml!}/madmin/js/plugins/layer/laydate/laydate.js"></script>
 <!-- 自定义js -->
 <script src="${ml!}/madmin/js/content.js"></script>
 <!--jquery validate-->
 <script src="${ml!}/madmin/js/plugins/validate/jquery.validate.min.js"></script>
 <script src="${ml!}/madmin/js/plugins/validate/messages_zh.min.js"></script>
-<script src="${ml!}/madmin/js/plugins/layer/laydate/laydate.js"></script>
 <!-- jquery seat-charts   -->
 <script src="${ml!}/madmin/js/plugins/seatCharts/jquery.seat-charts.min.js"></script>
