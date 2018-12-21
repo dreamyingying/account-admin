@@ -78,4 +78,14 @@ public interface IUserService {
       * @return
       **/
     List<User> getUserListByProperty(String property, Object value);
+
+
+    /**
+      * Description 发送短信验证码
+      * @author Menglei（lei.meng@cmgplex.com)
+      * @date 17:33 2018/12/21
+      * @param
+      * @return
+      **/
+    void sendMessage(String tel);
 }

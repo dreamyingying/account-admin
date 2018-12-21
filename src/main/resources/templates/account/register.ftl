@@ -20,52 +20,120 @@
         .reg{
         }
         .tel{
-
-            width:80%;
-            margin-left: 10%;
+            margin-top: 13%;
+            width:60%;
+            margin-left: 20%;
         }
         .code{
-            width:50%;
+            float: left;
+            width:32%;
+            margin-left: 20%;
         }
         .fs{
+            margin-left: 3%;
+            float: left;
         }
         .butt{
-            width:80%;
-            margin-left: 10%;
+            width:60%;
+            margin-left: 20%;
+            margin-top: 11%;
+        }
+        .spdiv {
+            position: relative;
+            top:10%;
+            text-align: center;
+            width: 100%;
+            color: red;
+            font-size: 16px;
+        }
+        .fff{
+            margin-top: 11%;
+        }
+        .fff:after{
+            content:"";
+            clear: both;
+            display: block;
         }
     </style>
 </head>
 
-<body>
+<body style="background: url('${ml!}/madmin/image/register_bg.jpg') no-repeat;background-size: 100% 100%;overflow-y: hidden;">
+        <div class="spdiv"><span id="sp"></span></div>
     <div class="reg">
-        <div><span style="text-align: center" id="sp"></span></div>
-                    <div class="tel"><input class="form-control" name="tel" id="tel" placeholder="请输入手机号码"/></div>
+                    <div class="tel"><input class="form-control" name="tel" id="tel" placeholder="请输入手机号码" onblur="checkTel()"/></div>
+        <div class="fff">
                     <div class="code">
-                        <input class="form-control" name="tel" id="telCode" placeholder="请输入手机验证码">
+                        <input class="form-control" name="tel" id="telCode" placeholder="请输入验证码">
                     </div>
                     <div class="fs">
-                        <button style="float: left;margin-left:10px;margin-top: 3px;" name="sendCode" id="sendCode">发送验证码</button>
+                        <button class="btn btn-success" name="sendCode" id="sendCode" onclick="sendTelMessage()">获取验证码</button>
                     </div>
+        </div>
         <div class="butt">
-            <button class="btn btn-info btn-block button">立即注册</button>
+            <button style="width: 100%" class="btn btn-info">立 即 注 册</button>
         </div>
     </div>
 
      <!-- 全局js -->
-    <script src="${ctx!}/hadmin/js/jquery.min.js?v=2.1.4"></script>
-    <script src="${ctx!}/hadmin/js/bootstrap.min.js?v=3.3.6"></script>
-    <script src="${ctx!}/hadmin/js/plugins/layer/layer.min.js?v=${version!}"></script>
-
-    <!-- 自定义js -->
-    <script src="${ctx!}/hadmin/js/content.js?v=1.0.0"></script>
+    <script src="${ml!}/madmin/js/jquery.min.js"></script>
+    <script src="${ml!}/madmin/js/bootstrap.min.js"></script>
+    <script src="${ml!}/madmin/js/plugins/layer/layer.min.js"></script>
 
     <!-- jQuery Validation plugin javascript-->
-    <script src="${ctx!}/hadmin/js/plugins/validate/jquery.validate.min.js"></script>
-    <script src="${ctx!}/hadmin/js/plugins/validate/messages_zh.min.js"></script>
+    <script src="${ml!}/madmin/js/plugins/validate/jquery.validate.min.js"></script>
+    <script src="${ml!}/madmin/js/plugins/validate/messages_zh.min.js"></script>
 	<script type="text/javascript">
+
+        var flag = true;
+
+        function checkTel() {
+            var tel = $("#tel").val();
+            if (!(/^1([34578])\d{9}$/.test(tel))){
+                layer.msg('请输入正确的手机号码',{time:2000},function () {
+                });
+                flag = false;
+                return;
+            }
+            $.ajax({
+                type: 'POST',
+                dataType: 'json',
+                url:'${ml!}/checkTel/'+tel,
+                success:function (msg) {
+                    if (msg.data){
+                        flag = true;
+                    }else {
+                        flag = false;
+                        layer.msg('手机号已被注册！', {time: 2000},function(){
+                        });
+                    }
+                }
+            })
+        }
+
+        function sendTelMessage() {
+            checkTel();
+            if (!flag){
+                return;
+            }
+            var tel = $("#tel").val();
+            $.ajax({
+                type:"POST",
+                dataType:"json",
+                url:"${ctx!}/sendMessage/"+tel,
+                success:function (msg) {
+                    var but = document.getElementById("telCode");
+                    but.innerHTML = "已发送..";
+                    but.disabled = true ;
+                    layer.msg("发送成功！",{time: 1000}, function () {
+                    });
+                }
+            })
+        }
+
     $(document).ready(function() {
 
-        var flag = false;
+
+
 
       /*  //取消修改密码
         $("#cancel").bind('click',function () {
@@ -74,7 +142,7 @@
         });*/
 
         //修改密码
-        $("#ok").bind('click',function () {
+        /*$("#ok").bind('click',function () {
             resetPassword();
         });
 
@@ -84,9 +152,9 @@
             if (flag) {
             sendTelMessage(uName);
             }
-        });
+        });*/
 
-        function sendTelMessage(uName) {
+       /* function sendTelMessage(uName) {
             $.ajax({
                 type:"POST",
                 dataType:"json",
@@ -99,8 +167,8 @@
                     });
                 }
             })
-        }
-        function checkNull(userName) {
+        }*/
+        /*function checkNull(userName) {
             if (userName.length === 0 || userName === null || userName === ''){
                 flag = false;
                 $("#sp").text("用户名/手机号不能为空！").css({"color":"red","font-size":"14px"});
@@ -134,7 +202,7 @@
                             }
                         }
             })
-        }
+        }*/
 
 /*
         function checknull(old,new1,new2) {
@@ -146,7 +214,7 @@
                 $("#sp").text("密码不能为空！！").css({"color":"red","font-size":"14px"});
             }
         }*/
-        function resetPassword() {
+        /*function resetPassword() {
             var userName = $("#old").val();
             var code = $("#telCode").val();
                 checkNull(userName);
@@ -174,7 +242,7 @@
                         });
                     }
                 })
-        }
+        }*/
 
     	// 在键盘按下并释放及提交后验证提交表单
     	  /*$("#frm").validate({

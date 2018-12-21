@@ -1,5 +1,6 @@
 package com.menglei.account.admin.controller;
 
+import com.menglei.account.admin.common.SMSUtils;
 import com.menglei.account.admin.service.IUserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -38,5 +39,10 @@ public class IndexController {
     public String welcome(){
         log.info("进入welcome！");
         return "/account/welcome";
+    }
+
+    @RequestMapping(value = "test")
+    public void testSMS(){
+        SMSUtils.sendMessage("18201472133","851314");
     }
 }

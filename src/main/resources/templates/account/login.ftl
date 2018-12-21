@@ -18,14 +18,14 @@
     <link href="${ml!}/madmin/css/style.css" rel="stylesheet">
 <style>
     .login{
-        width: 20%;
-        height: 40%;
+        width: 420px;
+        height: 400px;
         border: 1px solid #2F4F4F;
         margin-top: 10%;
         margin-left: 40%;
     }
     .ddiv{
-        height: 80%;
+        height: 320px;
         background: rgba(0,0,0,0.3);
     }
     .uname{
@@ -41,10 +41,10 @@
         margin-left: 15%;
     }
     .jiajiadiv{
-        line-height: 90px;
+        line-height: 80px;
         background-color: #5CACEE;
         background: rgba(0,0,0,0.5);
-        height: 20%;
+        height: 80px;
         text-align: center;
         font-weight: bolder;
         font-size: 20px;
@@ -82,11 +82,10 @@
         top:15%;
     }
     .registerDiv{
-        width: 25%;
         height: 20px;
         position: relative;
-        left: 80%;
-        top: 13%;
+        left: 320px;
+        top: 32px;
     }
     .registerDiv a{
         font-size: 16px;
@@ -116,22 +115,22 @@
         <div class="logindiv">
             <span class="hr">Login</span><hr>
         </div>
-        <div style="margin-top: 30px;">
+        <div style="margin-top: 34px;">
             <input type="text" class="form-control uname" id="userName" name="userName" placeholder="用户名/手机号">
 
         </div>
-        <div style="margin-top: 30px;">
+        <div style="margin-top: 34px;">
             <input style="" type="password" class="form-control pwd m-b" name="password" id="password"  placeholder="密码"/>
         </div>
 
-        <div style="margin-top: 30px;">
+        <div style="margin-top: 34px;">
             <button class="btn btn-success btn-block button" id="form">
                 登&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;录
             </button>
         </div>
 </form>
         <div class="registerDiv">
-            <a href="javascript:void (0);" onclick="register()">立即注册</a>
+            <a href="javascript:void (0);" onclick="register()">点击注册</a>
         </div>
     </div>
 </div>
@@ -160,7 +159,7 @@
             title: '用户注册',
             shadeClose: false,
             shade: false,
-            area: ['340px', '300px'],
+            area: ['400px', '350px'],
             content: ['${ctx!}/toRegister','no'],
             end: function (index) {
 

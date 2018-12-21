@@ -2,15 +2,19 @@ package com.menglei.account.admin.service.impl;
 
 import com.menglei.account.admin.common.JsonResult;
 import com.menglei.account.admin.common.Md5Utils;
+import com.menglei.account.admin.common.SMSUtils;
 import com.menglei.account.admin.rpc.api.ApiRpc;
 import com.menglei.account.admin.service.IUserService;
 import com.menglei.account.entity.BizData4PageAdmin;
 import com.menglei.account.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
   * @className UserServiceImpl
@@ -24,6 +28,9 @@ public class UserServiceImpl implements IUserService {
 
     @Autowired
     private ApiRpc apiRpc;
+
+    @Autowired
+    private RedisTemplate<String,String> redisTemplate;
 
     @Override
     public BizData4PageAdmin<User> getUserList(Integer pageNumber,Integer pageSize) {
@@ -68,5 +75,16 @@ public class UserServiceImpl implements IUserService {
     @Override
     public List<User> getUserListByProperty(String property, Object value) {
         return this.apiRpc.getUserListByProperty(property,value).getData();
+    }
+
+    @Override
+    public void sendMessage(String tel) {
+        int code = (int) ((Math.random() * 9 + 1) * 100000);
+        String coodeStr = Integer.toString(code);
+        ValueOperations<String,String> ops = redisTemplate.opsForValue();
+        String str = tel+"_REGISTER_CODE";
+        ops.set(str,coodeStr);
+        this.redisTemplate.expire(str,600,TimeUnit.SECONDS);
+        SMSUtils.sendMessage(tel,coodeStr);
     }
 }
