@@ -139,7 +139,7 @@
                         <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
                             <i class="fa fa-user"></i> <span
                                 class="label label-primary"></span>【欢迎您：<font
-                                color="red"><#--<@shiro.principal type="com.sparrow.hadmin.entity.User" property="userName"/>--></font>】
+                                color="red">${(user.userName)!}<#--<@shiro.principal type="com.sparrow.hadmin.entity.User" property="userName"/>--></font>】
                         </a>
                         <ul class="dropdown-menu dropdown-alerts" style="width: 165px">
                             <li>
@@ -187,6 +187,28 @@
 <script src="${ml!}/madmin/js/mAdmin.js"></script>
 <script type="text/javascript" src="${ml!}/madmin/js/index.js"></script>
 <script type="text/javascript">
+
+    window.checkFamily();
+
+   function checkFamily() {
+        if (${(noFamily)!}) {
+            layer.open({
+                type: 2,
+                title: '【加入我的家庭】或【创建我的家庭】',
+                closeBtn: 0,
+                shadeClose: false,
+                shade: 0.4,
+                area: ['600px', '500px'],
+                content: ['${ctx!}/admin/family/toJoinFamily', 'no'],
+                end: function (index) {
+
+                }
+            });
+        }
+    }
+
+
+
     function editPassword() {
         layer.open({
             type: 2,

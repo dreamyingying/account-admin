@@ -2,7 +2,9 @@ package com.menglei.account.admin.rpc.api;
 
 import com.menglei.account.admin.common.JsonResult;
 import com.menglei.account.entity.BizData4PageAdmin;
+import com.menglei.account.entity.Family;
 import com.menglei.account.entity.User;
+import com.menglei.account.entity.UserFamily;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 
@@ -84,4 +86,64 @@ public interface ApiRpc {
     @GetMapping(value = "/user/byProperty/{property}/{value}")
     JsonResult<List<User>> getUserListByProperty(@PathVariable(value = "property")String property,
                                                  @PathVariable(value = "value")Object value);
+
+    /**
+      * Description 新增userFamily
+      * @author Menglei（lei.meng@cmgplex.com)
+      * @date 14:31 2018/12/24
+      * @param
+      * @return
+      **/
+    @PostMapping(value = "/userFamily/add")
+    JsonResult<Boolean> addUserFamily(@RequestBody UserFamily userFamily);
+
+    /**
+      * Description 通过userId获取userFamily
+      * @author Menglei（lei.meng@cmgplex.com)
+      * @date 14:33 2018/12/24
+      * @param
+      * @return
+      **/
+    @GetMapping(value = "/userFamily/byUserId/{userId}")
+    JsonResult<UserFamily> getUserFamilyByUserId(@PathVariable(value = "userId")Long userId);
+
+    /**
+      * Description 通过familyId获取userFamily
+      * @author Menglei（lei.meng@cmgplex.com)
+      * @date 14:34 2018/12/24
+      * @param
+      * @return
+      **/
+    @GetMapping(value = "/userFamily/byFamilyId/{familyId}")
+    JsonResult<List<UserFamily>> getUserFamilyByFamilyId(@PathVariable(value = "familyId")Long familyId);
+
+    /**
+      * Description 新增家庭
+      * @author Menglei（lei.meng@cmgplex.com)
+      * @date 15:38 2018/12/24
+      * @param
+      * @return
+      **/
+    @PostMapping(value = "/family/add")
+    JsonResult<Boolean> addFamily(@RequestBody Family family);
+
+    /**
+      * Description 修改家庭信息
+      * @author Menglei（lei.meng@cmgplex.com)
+      * @date 15:39 2018/12/24
+      * @param
+      * @return
+      **/
+    @PostMapping(value = "/family/update")
+    JsonResult<Boolean> updateFamily(@RequestBody Family family);
+
+    /**
+      * Description 通过主键获取家庭信息
+      * @author Menglei（lei.meng@cmgplex.com)
+      * @date 15:40 2018/12/24
+      * @param
+      * @return
+      **/
+    @GetMapping(value = "/family/byId/{id}")
+    JsonResult<Family> getFamilyById(@PathVariable(value = "id")Long id);
 }

@@ -3,7 +3,9 @@ package com.menglei.account.admin.rpc.api;
 import com.menglei.account.admin.common.JsonResult;
 import com.menglei.account.admin.common.enums.RetCodeEnum;
 import com.menglei.account.entity.BizData4PageAdmin;
+import com.menglei.account.entity.Family;
 import com.menglei.account.entity.User;
+import com.menglei.account.entity.UserFamily;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -68,6 +70,48 @@ public class ApiRpcFallback implements ApiRpc{
     public JsonResult<List<User>> getUserListByProperty(String property, Object value) {
         JsonResult<List<User>> ret = new JsonResult<>(RetCodeEnum.BADGATEWAY);
         log.error("execute rpc(apiRpc.getUserListByProperty) failed ,args:【property={},value={}】。ret=", property,value,ret);
+        return ret;
+    }
+
+    @Override
+    public JsonResult<Boolean> addUserFamily(UserFamily userFamily) {
+        JsonResult<Boolean> ret = new JsonResult<>(RetCodeEnum.BADGATEWAY);
+        log.error("execute rpc(apiRpc.addUserFamily) failed ,args:【userFamily={}】。ret=", userFamily,ret);
+        return ret;
+    }
+
+    @Override
+    public JsonResult<UserFamily> getUserFamilyByUserId(Long userId) {
+        JsonResult<UserFamily> ret = new JsonResult<>(RetCodeEnum.BADGATEWAY);
+        log.error("execute rpc(apiRpc.getUserFamilyByUserId) failed ,args:【userId={}】。ret=", userId,ret);
+        return ret;
+    }
+
+    @Override
+    public JsonResult<List<UserFamily>> getUserFamilyByFamilyId(Long familyId) {
+        JsonResult<List<UserFamily>> ret = new JsonResult<>(RetCodeEnum.BADGATEWAY);
+        log.error("execute rpc(apiRpc.getUserFamilyByFamilyId) failed ,args:【familyId={}】。ret=", familyId,ret);
+        return ret;
+    }
+
+    @Override
+    public JsonResult<Boolean> addFamily(Family family) {
+        JsonResult<Boolean> ret = new JsonResult<>(RetCodeEnum.BADGATEWAY);
+        log.error("execute rpc(apiRpc.addFamily) failed ,args:【family={}】。ret=", family,ret);
+        return ret;
+    }
+
+    @Override
+    public JsonResult<Boolean> updateFamily(Family family) {
+        JsonResult<Boolean> ret = new JsonResult<>(RetCodeEnum.BADGATEWAY);
+        log.error("execute rpc(apiRpc.updateFamily) failed ,args:【family={}】。ret=", family,ret);
+        return ret;
+    }
+
+    @Override
+    public JsonResult<Family> getFamilyById(Long id) {
+        JsonResult<Family> ret = new JsonResult<>(RetCodeEnum.BADGATEWAY);
+        log.error("execute rpc(apiRpc.getFamilyById) failed ,args:【id={}】。ret=", id,ret);
         return ret;
     }
 }

@@ -19,7 +19,7 @@
 
 </head>
 
-<body>
+<body  style="background: url('${ml!}/madmin/image/welcome_bg.jpg') no-repeat;background-size: 100% 100%;overflow-y: hidden;">
 <div class="container-fluid">
 
 

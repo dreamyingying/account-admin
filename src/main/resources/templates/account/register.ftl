@@ -70,7 +70,7 @@
                     </div>
         </div>
         <div class="butt">
-            <button style="width: 100%" class="btn btn-info">立 即 注 册</button>
+            <button style="width: 100%" class="btn btn-info" onclick="register()">立 即 注 册</button>
         </div>
     </div>
 
@@ -111,6 +111,8 @@
         }
 
         function sendTelMessage() {
+            var but = document.getElementById("sendCode");
+            but.disabled = true ;
             checkTel();
             if (!flag){
                 return;
@@ -121,20 +123,57 @@
                 dataType:"json",
                 url:"${ctx!}/sendMessage/"+tel,
                 success:function (msg) {
-                    var but = document.getElementById("telCode");
                     but.innerHTML = "已发送..";
-                    but.disabled = true ;
                     layer.msg("发送成功！",{time: 1000}, function () {
                     });
                 }
             })
         }
 
+        function checkCode(tel){
+            var code = $("#telCode").val();
+            $.ajax({
+                type: 'POST',
+                url: '${ml!}/checkCode/'+tel+'/'+code,
+                dataType: 'json',
+                success: function (msg) {
+                    if (!msg.data) {
+                        flag = false;
+                        layer.msg("验证码错误！",{time: 1000}, function () {
+                        });
+                    }else {
+                        flag = true;
+                    }
+                }
+            })
+        }
+
+
+
+        function register() {
+            var tel = $("#tel").val();
+            checkTel();
+            if (!flag){
+                return;
+            }
+            checkCode(tel);
+            if (!flag){
+                return;
+            }
+            $.ajax({
+                type: 'POST',
+                url: '${ml!}/register/'+tel,
+                dataType: 'json',
+                success: function (msg) {
+                        window.parent.frames.registerMsg(msg.message);
+                        var index = parent.layer.getFrameIndex(window.name);
+                        parent.layer.close(index);
+                }
+            })
+        }
+
+
     $(document).ready(function() {
-
-
-
-
       /*  //取消修改密码
         $("#cancel").bind('click',function () {
             var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引

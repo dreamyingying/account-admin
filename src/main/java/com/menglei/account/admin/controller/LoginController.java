@@ -4,10 +4,12 @@ import com.menglei.account.admin.common.JsonResult;
 import com.menglei.account.admin.service.IUserService;
 import com.menglei.account.entity.User;
 import com.sun.org.apache.xpath.internal.operations.Bool;
+import org.omg.CORBA.portable.UnknownException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
@@ -100,6 +102,48 @@ public class LoginController {
     public JsonResult<Boolean> sendMessage(@PathVariable(value = "tel")String tel){
         JsonResult<Boolean> jr = new JsonResult<>();
         this.userService.sendMessage(tel);
+        return jr;
+    }
+
+    @PostMapping(value = "/checkCode/{tel}/{code}")
+    @ResponseBody
+    public JsonResult<Boolean> checkCode(@PathVariable(value = "tel")String tel,@PathVariable(value = "code")String code){
+        JsonResult<Boolean> jr = new JsonResult<>();
+       /* ValueOperations<String, String> vos = redisTemplate.opsForValue();
+        String codeRedis = vos.get(tel + "_REGISTER_CODE");
+        if (null==codeRedis){
+            jr.setData(false);
+            jr.setMessage("验证码有误或验证码已过期！");
+        }else if (!code.equals(codeRedis)){
+            jr.setData(false);
+            jr.setMessage("验证码有误！");
+        }else {
+            jr.setData(true);
+        }*/
+       jr.setData(true);
+        return jr;
+    }
+
+    @PostMapping(value = "/register/{tel}")
+    @ResponseBody
+    public JsonResult<Boolean> register(@PathVariable(value = "tel")String tel)throws UnknownException {
+        JsonResult<Boolean> jr = new JsonResult<>();
+        User user = new User();
+        user.setTelephone(tel);
+        try {
+            Boolean b = this.userService.addUser(user);
+            if (b){
+                jr.setMessage("注册成功,初始密码为：123456,请及时修改密码！");
+                jr.setCode("8200");
+            }else {
+                jr.setMessage("注册失败");
+                jr.setCode("8299");
+            }
+            jr.setData(b);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new UnknownException(e);
+        }
         return jr;
     }
 

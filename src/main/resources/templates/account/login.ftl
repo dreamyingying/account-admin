@@ -152,6 +152,10 @@
         }
     });
 
+    function registerMsg(message) {
+        layer.msg(message,{time:3000});
+    }
+
     //弹出注册窗口
     function register() {
         layer.open({

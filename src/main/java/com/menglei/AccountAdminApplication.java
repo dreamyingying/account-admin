@@ -15,5 +15,6 @@ public class AccountAdminApplication {
     public static void main(String[] args) {
         SpringApplication.run(AccountAdminApplication.class, args);
         log.info("menglei:"+Md5Utils.md5("menglei"));
+        log.info("123456:"+Md5Utils.md5("123456"));
     }
 }

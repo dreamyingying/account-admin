@@ -1,12 +1,18 @@
 package com.menglei.account.admin.controller;
 
 import com.menglei.account.admin.common.SMSUtils;
+import com.menglei.account.admin.service.IUserFamilyService;
 import com.menglei.account.admin.service.IUserService;
+import com.menglei.account.entity.User;
+import com.menglei.account.entity.UserFamily;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
   * @className IndexController
@@ -18,6 +24,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class IndexController {
     private Logger log = LoggerFactory.getLogger(IndexController.class);
+
+    @Autowired
+    private IUserFamilyService userFamilyService;
 
 
     /**
@@ -31,7 +40,15 @@ public class IndexController {
     }
 
     @RequestMapping(value = "/admin/index")
-    public String index(){
+    public String index(HttpServletRequest request, ModelMap map){
+        User user = (User) request.getSession().getAttribute("user");
+        map.put("user",user);
+        UserFamily userFamily = this.userFamilyService.getByUserId(user.getId());
+        if(null == userFamily){
+        map.put("noFamily",true);
+        }else {
+            map.put("noFamily",false);
+        }
         return "/account/index";
     }
 
@@ -39,10 +56,5 @@ public class IndexController {
     public String welcome(){
         log.info("进入welcome！");
         return "/account/welcome";
-    }
-
-    @RequestMapping(value = "test")
-    public void testSMS(){
-        SMSUtils.sendMessage("18201472133","851314");
     }
 }
