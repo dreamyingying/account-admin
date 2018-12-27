@@ -42,10 +42,10 @@
 <body style="background: url('${ml!}/madmin/image/joinFamily_bg.png') no-repeat;background-size: 100% 100%;overflow-y: hidden;">
 <div class="tipDiv">尊敬的<font color="red"><b>${(user.userName)!}</b></font>!您好!您还未拥有属于您自己的家庭!如果您的家人已经创建过家庭了,请您选择【<font color="#5bc0de"><b>加入我的家庭</b></font>】,如果您的家庭是第一次使用系统,请选择【<font color="#23ad44"><b>创建我的家庭</b></font>】</div>
         <div class="jDiv">
-            <button style="height: 80px;font-size: 22px;" class="btn btn-info">加入我的家庭</button>
+            <button style="height: 80px;font-size: 22px;" class="btn btn-info" onclick="joinMyFamily()">加入我的家庭</button>
         </div>
         <div class="cDiv">
-            <button style="height: 80px;font-size: 22px;" class="btn btn-success">创建我的家庭</button>
+            <button style="height: 80px;font-size: 22px;" class="btn btn-success" onclick="createMyFamily()">创建我的家庭</button>
         </div>
 
 
@@ -58,6 +58,44 @@
     <script src="${ml!}/madmin/js/plugins/validate/jquery.validate.min.js"></script>
     <script src="${ml!}/madmin/js/plugins/validate/messages_zh.min.js"></script>
 	<script type="text/javascript">
+
+        /*加入我的家庭*/
+        function joinMyFamily() {
+            layer.open({
+                type: 2,
+                title: '加入我的家庭',
+                closeBtn: 0,
+                shadeClose: false,
+                shade: 0.4,
+                area: ['400px', '340px'],
+                content: ['${ml!}/admin/family/toJoinMyFamily', 'no'],
+                end: function (index) {
+
+                }
+            });
+        }
+
+        /*创建我的家庭*/
+        function createMyFamily() {
+            layer.open({
+                type: 2,
+                title: '创建我的家庭',
+                closeBtn: 0,
+                shadeClose: false,
+                shade: 0.4,
+                area: ['400px', '340px'],
+                content: ['${ml!}/admin/family/toCreateMyFamily', 'no'],
+                end: function (index) {
+
+                }
+            });
+        }
+
+        function closePage() {
+            window.parent.frames.reloadPage();
+            var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+            parent.layer.close(index);
+        }
 
         var flag = true;
 

@@ -2,14 +2,15 @@ package com.menglei.account.admin.controller;
 
 import com.menglei.account.admin.common.JsonResult;
 import com.menglei.account.admin.service.IUserFamilyService;
+import com.menglei.account.entity.User;
 import com.menglei.account.entity.UserFamily;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
   * @className UserFamilyController
@@ -45,6 +46,33 @@ public class UserFamilyController {
             e.printStackTrace();
         } finally {
             log.info("**结束** 执行UserFamilyController.checkFamily【userId={}】",userId);
+        }
+        return jr;
+    }
+
+    @PostMapping(value = "/add/{id}")
+    @ResponseBody
+    public JsonResult<Boolean> add(@PathVariable(value = "id")Long id, HttpServletRequest request){
+        log.info("**开始执行** UserFamilyController.add【userId={}】",id);
+        User user = (User) request.getSession().getAttribute("user");
+        UserFamily userFamily = new UserFamily();
+        userFamily.setUserId(user.getId());
+        userFamily.setFamilyId(id);
+        JsonResult<Boolean> jr = new JsonResult<>();
+        try {
+            Boolean b = this.userFamilyService.add(userFamily);
+            jr.setData(b);
+            if (b){
+                jr.setMessage("加入家庭成功");
+                jr.setCode("8200");
+            }else {
+                jr.setMessage("加入家庭失败");
+                jr.setCode("8299");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            log.info("**结束执行** UserFamilyController.add【userId={}】",id);
         }
         return jr;
     }

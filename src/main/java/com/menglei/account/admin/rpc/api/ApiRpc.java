@@ -146,4 +146,34 @@ public interface ApiRpc {
       **/
     @GetMapping(value = "/family/byId/{id}")
     JsonResult<Family> getFamilyById(@PathVariable(value = "id")Long id);
+
+    /**
+      * Description 获取所有的家庭
+      * @author Menglei（lei.meng@cmgplex.com)
+      * @date 16:44 2018/12/25
+      * @param
+      * @return
+      **/
+    @GetMapping(value = "/family/all")
+    JsonResult<List<Family>> findAllFamily();
+
+    /**
+      * Description 密码获取家庭信息
+      * @author Menglei（lei.meng@cmgplex.com)
+      * @date 17:16 2018/12/25
+      * @param
+      * @return
+      **/
+    @GetMapping(value = "/family/byPassword/{id}/{password}")
+    JsonResult<Family> getFamilyByPassword(@PathVariable(value = "id")Long id,@PathVariable(value = "password")String password);
+
+    /**
+      * Description 名称获取家庭信息
+      * @author Menglei（lei.meng@cmgplex.com)
+      * @date 22:58 2018/12/25
+      * @param
+      * @return
+      **/
+    @GetMapping(value = "/family/byName/{name}")
+    JsonResult<Family> getFamilyByName(@PathVariable(value = "name")String name);
 }

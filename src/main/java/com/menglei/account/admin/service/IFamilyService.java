@@ -2,6 +2,8 @@ package com.menglei.account.admin.service;
 
 import com.menglei.account.entity.Family;
 
+import java.util.List;
+
 /**
   * @className IFamilyService
   * @Description TODO
@@ -16,4 +18,10 @@ public interface IFamilyService {
     Boolean update(Family family);
 
     Family getById(Long id);
+
+    List<Family> findAll();
+
+    Family getByPassword(Long id,String password);
+
+    Family getByName(String name);
 }

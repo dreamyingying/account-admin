@@ -19,14 +19,14 @@
 
 </head>
 
-<body  style="background: url('${ml!}/madmin/image/welcome_bg.jpg') no-repeat;background-size: 100% 100%;overflow-y: hidden;">
+<body  style="background: url('${ml!}/madmin/image/welcome1_bg.jpg') no-repeat;background-size: 100% 100%;overflow-y: hidden;">
 <div class="container-fluid">
 
 
     <div class="row" style="margin-top: 10%">
         <h5 style="text-align: center;font-weight: bold;font-size: 80px;color: #FF7256">欢 迎 使 用</h5>
         <br><br>
-        <h2 style="text-align: center;font-weight: bold;font-size: 80px;color: #FF7256" class="panel padder-v item">
+        <h2 style="text-align: center;font-weight: bold;font-size: 80px;color: #FF7256" class="">
             <font color="blue">佳佳</font> 家 庭 账 务 管 理 系 统</h2>
 
     </div>

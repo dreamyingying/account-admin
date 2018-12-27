@@ -114,4 +114,25 @@ public class ApiRpcFallback implements ApiRpc{
         log.error("execute rpc(apiRpc.getFamilyById) failed ,args:【id={}】。ret=", id,ret);
         return ret;
     }
+
+    @Override
+    public JsonResult<List<Family>> findAllFamily() {
+        JsonResult<List<Family>> ret = new JsonResult<>(RetCodeEnum.BADGATEWAY);
+        log.error("execute rpc(apiRpc.findAllFamily) failed 。ret=", ret);
+        return ret;
+    }
+
+    @Override
+    public JsonResult<Family> getFamilyByPassword(Long id, String password) {
+        JsonResult<Family> ret = new JsonResult<>(RetCodeEnum.BADGATEWAY);
+        log.error("execute rpc(apiRpc.getFamilyByPassword) failed ,args:【id={},password={}】。ret=", id,password,ret);
+        return ret;
+    }
+
+    @Override
+    public JsonResult<Family> getFamilyByName(String name) {
+        JsonResult<Family> ret = new JsonResult<>(RetCodeEnum.BADGATEWAY);
+        log.error("execute rpc(apiRpc.getFamilyByName) failed ,args:【name={}】。ret=", name,ret);
+        return ret;
+    }
 }

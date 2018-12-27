@@ -131,11 +131,23 @@
     <div id="page-wrapper" class="gray-bg dashbard-1">
         <div class="row border-bottom">
             <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
-                <div class="navbar-header""><a class="navbar-minimalize minimalize-styl-2 btn btn-info " href="#"><i
+                <div class="navbar-header" style="width: 120px;"><a class="navbar-minimalize minimalize-styl-2 btn btn-info " href="#"><i
                         class="fa fa-bars"></i> </a>
                 </div>
+        <div style="
+                                         text-align: center;
+                                         font-size: 38px;
+                                         font-weight: bolder;
+                                         font-style: italic;
+                                         float: left;
+                                         color: #66CD00;
+                                         font-family: 幼圆;
+                                         margin-left: 6px;
+                                                                    ">
+        欢 迎 使 用 佳 佳 家 庭 账 务 管 理 系 统</div>
+                    <div style="font-weight: bold;float: left;margin-top: 16px;margin-left: 40px;"><font size="4" color="#6495ED">我 的 家 庭 财 务 情 况 ：</font>存款：<font color="red">${(deposit)!}</font> 元&nbsp;&nbsp;&nbsp;&nbsp; 应收：<font color="red">${(receivable)!}</font> 元&nbsp;&nbsp; &nbsp;&nbsp; 应付：<font color="red">${(payable)!}</font> 元</div>
                 <ul class="nav navbar-top-links navbar-right">
-                    <li class="dropdown">
+                    <li class="dropdown" style="margin-top: 6px;">
                         <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
                             <i class="fa fa-user"></i> <span
                                 class="label label-primary"></span>【欢迎您：<font
@@ -205,6 +217,10 @@
                 }
             });
         }
+    }
+    
+    function reloadPage() {
+        location.reload();
     }
 
 

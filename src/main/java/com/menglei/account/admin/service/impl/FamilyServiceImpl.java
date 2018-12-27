@@ -6,6 +6,8 @@ import com.menglei.account.entity.Family;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
   * @className FamilyServiceImpl
   * @Description TODO
@@ -32,5 +34,20 @@ public class FamilyServiceImpl implements IFamilyService {
     @Override
     public Family getById(Long id) {
         return this.apiRpc.getFamilyById(id).getData();
+    }
+
+    @Override
+    public List<Family> findAll() {
+        return this.apiRpc.findAllFamily().getData();
+    }
+
+    @Override
+    public Family getByPassword(Long id, String password) {
+        return this.apiRpc.getFamilyByPassword(id,password).getData();
+    }
+
+    @Override
+    public Family getByName(String name) {
+        return this.apiRpc.getFamilyByName(name).getData();
     }
 }

@@ -1,21 +1,26 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
 
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="HandheldFriendly" content="true">
 
     <!--360浏览器优先以webkit内核解析-->
 
 
-    <title> - welcome</title>
+    <title>welcome-佳佳账务</title>
 
     <link rel="shortcut icon" href="favicon.ico">
     <link href="${ml!}/madmin/css/bootstrap.min.css" rel="stylesheet">
     <link href="${ml!}/madmin/css/font-awesome.css" rel="stylesheet">
     <link href="${ml!}/madmin/css/animate.css" rel="stylesheet">
     <link href="${ml!}/madmin/css/style.css" rel="stylesheet">
+    <script type="text/javascript">
+        document.documentElement.style.fontSize = document.documentElement.clientWidth / 640*100 + 'px';
+    </script>
 <style>
     .login{
         width: 420px;

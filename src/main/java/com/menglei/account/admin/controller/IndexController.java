@@ -1,8 +1,10 @@
 package com.menglei.account.admin.controller;
 
 import com.menglei.account.admin.common.SMSUtils;
+import com.menglei.account.admin.service.IFamilyService;
 import com.menglei.account.admin.service.IUserFamilyService;
 import com.menglei.account.admin.service.IUserService;
+import com.menglei.account.entity.Family;
 import com.menglei.account.entity.User;
 import com.menglei.account.entity.UserFamily;
 import org.slf4j.Logger;
@@ -27,6 +29,8 @@ public class IndexController {
 
     @Autowired
     private IUserFamilyService userFamilyService;
+    @Autowired
+    private IFamilyService familyService;
 
 
     /**
@@ -42,12 +46,17 @@ public class IndexController {
     @RequestMapping(value = "/admin/index")
     public String index(HttpServletRequest request, ModelMap map){
         User user = (User) request.getSession().getAttribute("user");
+        Long userId = user.getId();
         map.put("user",user);
-        UserFamily userFamily = this.userFamilyService.getByUserId(user.getId());
+        UserFamily userFamily = this.userFamilyService.getByUserId(userId);
         if(null == userFamily){
         map.put("noFamily",true);
         }else {
+            Family family = this.familyService.getById(userFamily.getFamilyId());
             map.put("noFamily",false);
+            map.put("deposit",family.getDeposit());
+            map.put("receivable",family.getReceivable());
+            map.put("payable",family.getPayable());
         }
         return "/account/index";
     }
